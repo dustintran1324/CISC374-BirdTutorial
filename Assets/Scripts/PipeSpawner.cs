@@ -23,10 +23,25 @@ public class PipeSpawner : MonoBehaviour
         timer = 0;
         }
     }
-    void spawnPipe(){
-        float lowest = transform.position.y - heightOffset;
-        float highest = transform.position.y + heightOffset;
+void spawnPipe()
+{
+    //Gap between pipes was too small
+    float gapSize = 3f; 
+    //Getting bounds
+    float screenTop = Camera.main.orthographicSize - 1; 
+    float screenBottom = -Camera.main.orthographicSize + 1; 
 
-        Instantiate(pipe, new Vector3(transform.position.x, Random.Range(lowest, highest),0), transform.rotation);
+    float randomY = Random.Range(screenBottom + gapSize / 2, screenTop - gapSize / 2);
+    GameObject newPipe = Instantiate(pipe, new Vector3(transform.position.x, randomY, 0), Quaternion.identity);
+    Transform topPipe = newPipe.transform.Find("TopPipe");
+    Transform bottomPipe = newPipe.transform.Find("BottomPipe");
+
+    if (topPipe != null && bottomPipe != null)
+    {
+        topPipe.position = new Vector3(topPipe.position.x, randomY + gapSize / 2, topPipe.position.z);
+        bottomPipe.position = new Vector3(bottomPipe.position.x, randomY - gapSize / 2, bottomPipe.position.z);
     }
+}
+
+
 }
