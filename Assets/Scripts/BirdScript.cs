@@ -9,6 +9,8 @@ public class BirdScript : MonoBehaviour
     public bool birdIsAlive = true;
     private AudioSource audioSource;
     public AudioClip flapSound;
+    public AudioClip hitPipe;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,6 +34,7 @@ public class BirdScript : MonoBehaviour
     {
         logic.gameOver();
         birdIsAlive = false;
+        audioSource.PlayOneShot(hitPipe);
     }
     //Kill Birdy when it touches bounds
     public void OnTouchingBound(){
