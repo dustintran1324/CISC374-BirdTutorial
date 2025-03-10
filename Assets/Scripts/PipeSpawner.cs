@@ -30,7 +30,7 @@ void spawnPipe()
     //Getting bounds
     float screenTop = Camera.main.orthographicSize - 1; 
     float screenBottom = -Camera.main.orthographicSize + 1; 
-
+// Making sure top & bottom pipes have enough space in between and not too far to be in the bound
     float randomY = Random.Range(screenBottom + gapSize / 2, screenTop - gapSize / 2);
     GameObject newPipe = Instantiate(pipe, new Vector3(transform.position.x, randomY, 0), Quaternion.identity);
     Transform topPipe = newPipe.transform.Find("TopPipe");
